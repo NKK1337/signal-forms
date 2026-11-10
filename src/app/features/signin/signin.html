@@ -1,0 +1,21 @@
+<form (submit)="onSubmit($event)" novalidate>
+  <h2>Sign in</h2>
+
+  <label>Email
+    <input type="email" [formField]="signinForm.email" />
+  </label>
+  @for (e of errorsOf(signinForm.email); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  <label>Password
+    <input type="password" [formField]="signinForm.password" />
+  </label>
+  @for (e of errorsOf(signinForm.password); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  @if (serverError()) { <p class="error">{{ serverError() }}</p> }
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Signing in...' : 'Sign in' }}
+  </button>
+
+  <p>No account yet? <a routerLink="/signup">Sign up</a></p>
+</form>

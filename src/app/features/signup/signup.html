@@ -1,0 +1,36 @@
+<form (submit)="onSubmit($event)" novalidate>
+  <h2>Sign up</h2>
+
+  <label>First name
+    <input type="text" [formField]="signupForm.firstName" />
+  </label>
+  @for (e of errorsOf(signupForm.firstName); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  <label>Last name
+    <input type="text" [formField]="signupForm.lastName" />
+  </label>
+  @for (e of errorsOf(signupForm.lastName); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  <label>Email
+    <input type="email" [formField]="signupForm.email" />
+  </label>
+  @for (e of errorsOf(signupForm.email); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  <label>Password
+    <input type="password" [formField]="signupForm.password" />
+  </label>
+  @for (e of errorsOf(signupForm.password); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  <label>Confirm password
+    <input type="password" [formField]="signupForm.confirmPassword" />
+  </label>
+  @for (e of errorsOf(signupForm.confirmPassword); track e.kind) { <p class="error">{{ e.message }}</p> }
+
+  @if (serverError()) { <p class="error">{{ serverError() }}</p> }
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Creating account...' : 'Sign up' }}
+  </button>
+
+  <p>Already have an account? <a routerLink="/">Sign in</a></p>
+</form>
